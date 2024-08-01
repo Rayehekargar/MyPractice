@@ -2,7 +2,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { useActionState } from 'react';
-import { createFacility,getMyFacilities, State } from '@/app/lib/actions';
+import { createFacility,getMyFacilities, State } from '../../lib/actions';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
@@ -12,11 +12,8 @@ import StepIndicator from './StepIndictator';
 import ModalComponent from "./modal";
 import { FacilityType , RepaymentType} from '../../types/facilityTypes';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/20/solid';
-import * as yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-const validationSchema = yup.object({
-  facilityType: yup.string().required('Facility type is required'),
-});
+
+
 
 const LoanForm = () => {
   const [step, setStep] = useState(1);
@@ -261,16 +258,8 @@ const LoanForm = () => {
     <div className="bg-white shadow-lg rounded-lg p-8  w-2/3">
       <h1 className="text-2xl font-bold mb-6 text-center">فرم ثبت و انتخاب تسهیلات</h1>
     
-      <Formik
-        initialValues={{ facilityType: '' }}
-        validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log('Form data:', values);
-          setSubmitting(false);
-        }}
-      >
-        {({ isValid, dirty }) => (
-          <Form>
+     
+          <form onSubmit={handleSubmit}>
             
       
       {step === 1 && <Step1 formData={formData} handleChange={handleChange} facilityTypes={facilityTypes} errors={errors}/>}
@@ -296,15 +285,14 @@ const LoanForm = () => {
  
       </div>
       <div className='text-center'>
-      {step === 5 && requestStatus === 'idle' && <button type="submit" onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">ارسال درخواست</button>}
+      {step === 5 && requestStatus === 'idle' && <button type="submit"  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded shadow">ارسال درخواست</button>}
             {step === 5 && requestStatus === 'submitting' && <button type="button" hidden className=" font-semibold py-2 px-4 rounded shadow">در حال ارسال...</button>}
             {step === 5 && requestStatus === 'success' && <button type="button" hidden  className="  font-semibold py-2 px-4 rounded shadow">درخواست ارسال شد</button>}
             {step === 5 && requestStatus === 'error' && <button type="button" hidden className=" font-semibold py-2 px-4 rounded shadow">خطا در ارسال درخواست</button>}
             {requestStatus !== 'idle' && <button className="text-customBlue font-semibold py-2 px-4 rounded " onClick={refreshPage}>درخواست مجدد</button>}
         </div>
-        </Form>
-        )}
-      </Formik>
+        </form>
+    
   
     </div>
     <ModalComponent myFacilities={myFacilities}/>

@@ -1,7 +1,5 @@
 // src/components/Step2.tsx
 import React, { useState,useEffect  } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-
 interface Step2Props {
   formData: any;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;

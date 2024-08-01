@@ -6,20 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch facilities.json --port 4000"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
-    "date-fns": "^3.6.0",
-    "formik": "^2.4.6",
-    "jalaali-js": "^1.2.7",
-    "jalali-moment": "^3.3.11",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18",
-    "react-modal": "^3.16.1",
-    "react-persian-datepicker": "^3.0.2",
-    "yup": "^1.4.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

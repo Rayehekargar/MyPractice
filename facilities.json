@@ -106,63 +106,6 @@
     }
   ],
   "myfacilities": [
-    {
-      "id": "6",
-      "createdDate": "2019-04-15T10:10:10.789Z",
-      "name": "وام شخصی",
-      "repaymentType": [
-        {
-          "name": "6 ماهه",
-          "value": 6
-        },
-        {
-          "name": "12 ماهه",
-          "value": 12
-        },
-        {
-          "name": "24 ماهه",
-          "value": 24
-        },
-        {
-          "name": "48 ماهه",
-          "value": 48
-        }
-      ],
-      "amount": 1000000000,
-      "interestRate": 18,
-      "penaltyRate": 3.5,
-      "repaymentPeriod": "12",
-      "monthlyamount": 1583333333.3333333,
-      "penalty": 35000000
-    },
-    {
-      "id": "6",
-      "createdDate": "2019-04-15T10:10:10.789Z",
-      "name": "وام شخصی",
-      "repaymentType": [
-        {
-          "name": "6 ماهه",
-          "value": 6
-        },
-        {
-          "name": "12 ماهه",
-          "value": 12
-        },
-        {
-          "name": "24 ماهه",
-          "value": 24
-        },
-        {
-          "name": "48 ماهه",
-          "value": 48
-        }
-      ],
-      "amount": 1000000000,
-      "interestRate": 18,
-      "penaltyRate": 3.5,
-      "repaymentPeriod": "48",
-      "monthlyamount": 395833333.3333333,
-      "penalty": 35000000
-    }
+
   ]
 }

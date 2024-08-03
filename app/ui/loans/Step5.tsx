@@ -11,8 +11,6 @@ interface Step5Props {
 }
 const Step5: React.FC<Step5Props> = ({formData,selectedFacility,message,monthlyamount,penalty}) => {
 
-
-
   return (
     <fieldset className='text-center'>
 
@@ -22,7 +20,8 @@ const Step5: React.FC<Step5Props> = ({formData,selectedFacility,message,monthlya
 
       </div>}
    
-      <div className='flex justify-around'>
+        <div className='flex justify-around'>
+        <div><span>نوع تسهیلات: </span>{selectedFacility?.name}</div>
         <div><span>مبلغ: </span>{selectedFacility?.amount.toLocaleString('fa-IR')}</div>
         <div><span>مدت زمان پرداخت: </span>{formData.repaymentPeriod}ماه</div>
         <div><span>تعداد اقساط: </span>{formData.repaymentPeriod}</div>

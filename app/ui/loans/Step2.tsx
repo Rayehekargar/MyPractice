@@ -77,7 +77,7 @@ const Step2: React.FC<Step2Props> = ({ formData, handleChange ,handleDateChange 
         type="text"
         value={formData.birthDate}
         onChange={handleDateOfBirthChange}
-        placeholder="YYYY/MM/DD"
+        placeholder="1363/05/02"
         className="block w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
       />
        {errors.birthDate && <div role="alert" className="text-red-500 text-xs mt-1">{errors.birthDate}</div>}

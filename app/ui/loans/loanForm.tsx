@@ -30,6 +30,7 @@ const LoanForm = () => {
     repaymentPeriod: '',
 
   });
+  const [formSubmitted , setFormSubmitted]= useState(true);
   const [facilityTypes, setFacilityTypes] = useState<FacilityType[]>([]);
   const [repaymentPeriods, setRepaymentPeriods] = useState<RepaymentType[]>([]);
   const [selectedFacility,setSelectedFacility]= useState<FacilityType | undefined>();
@@ -50,7 +51,9 @@ const LoanForm = () => {
       }).catch(error => {
         console.error('Error fetching facilities:', error);
       })
+    
 
+      setFormSubmitted(true);
   
   }, []);
 
@@ -115,8 +118,9 @@ const LoanForm = () => {
   };
   const validateAverageBalance = (balance: string): boolean => {
 
-    const numBalance = parseFloat(balance.replace(/,/g, ''));
-    return !isNaN(numBalance) && numBalance >= 0 && numBalance <= 1_000_000_000;
+    const cleanedValue = balance.replace(/[^0-9.,]/g, '');
+     const numBalance = parseFloat(cleanedValue.replace(/,/g, ''));
+     return !isNaN(numBalance) && numBalance >= 0;
   };
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -186,13 +190,26 @@ const LoanForm = () => {
     setErrors(newErrors);
     setIsNextStepDisabled(Object.keys(newErrors).length > 0);
   };
-
+  const formatCurrency = (value: string): string => {
+    let cleanedValue = value.replace(/[^0-9]/g, '');
+  
+    if (cleanedValue === '') {
+      return '';
+    } 
+    const numericValue = Number(cleanedValue);
+    return numericValue.toLocaleString('en-US') + ' ریال';
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'averageBalance') { 
+      const formattedValue = formatCurrency(e.target.value);
+  
+      setFormData({ ...formData, [e.target.name]:formattedValue});
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
     if (e.target.name === 'facilityType') {
       const selectedFacility = facilityTypes.find(facility => facility.id === e.target.value);
       if (selectedFacility) {
-
         setSelectedFacility(selectedFacility);
         setRepaymentPeriods(selectedFacility.repaymentType);
    
@@ -213,6 +230,7 @@ const LoanForm = () => {
   };
   const refreshPage = () => {
     window.location.reload();
+    setFormSubmitted(false);
   };
   const nextStep = () => {
  
@@ -227,6 +245,10 @@ const LoanForm = () => {
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (formSubmitted === false) {
+      return;
+    }    
     setRequestStatus('submitting');
 
     if (selectedFacility) {

@@ -5,7 +5,10 @@ interface ModalProps {
 
   myFacilities: FacilityType[];
 }
-
+function toPersianNumber(number:any) {
+  const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+  return number.toString().replace(/\d/g, (digit:any) => persianDigits[digit]);
+}
 const ModalComponent:React.FC<ModalProps> = ({myFacilities}) => {
   const [isOpen, setIsOpen] = useState(false);
   console.log('myFacilities',myFacilities)
@@ -48,8 +51,8 @@ const ModalComponent:React.FC<ModalProps> = ({myFacilities}) => {
                       <td className="px-4 py-2">{facility.amount.toLocaleString('fa-IR')}</td>
                       <td className="px-4 py-2">{facility.monthlyamount.toLocaleString('fa-IR')}</td>
                       <td className="px-4 py-2">{facility.penalty.toLocaleString('fa-IR')}</td>
-                      <td className="px-4 py-2">{facility.interestRate}%</td>
-                      <td className="px-4 py-2">{facility.penaltyRate}%</td>
+                      <td className="px-4 py-2">{toPersianNumber(facility.interestRate)}%</td>
+                      <td className="px-4 py-2">{toPersianNumber(facility.penaltyRate)}%</td>
                     </tr>
                   ))}
                 </tbody>

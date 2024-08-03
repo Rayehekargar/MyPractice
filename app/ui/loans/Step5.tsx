@@ -9,6 +9,11 @@ interface Step5Props {
   monthlyamount:number;
   penalty:number;
 }
+function toPersianNumber(number:any) {
+  const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+  return number.toString().replace(/\d/g, (digit:any) => persianDigits[digit]);
+}
+
 const Step5: React.FC<Step5Props> = ({formData,selectedFacility,message,monthlyamount,penalty}) => {
 
   return (
@@ -22,14 +27,14 @@ const Step5: React.FC<Step5Props> = ({formData,selectedFacility,message,monthlya
    
         <div className='flex justify-around'>
         <div><span>نوع تسهیلات: </span>{selectedFacility?.name}</div>
-        <div><span>مبلغ: </span>{selectedFacility?.amount.toLocaleString('fa-IR')}</div>
-        <div><span>مدت زمان پرداخت: </span>{formData.repaymentPeriod}ماه</div>
-        <div><span>تعداد اقساط: </span>{formData.repaymentPeriod}</div>
+        <div><span>مبلغ: </span>{selectedFacility?.amount.toLocaleString('fa-IR')} ریال</div>
+        <div><span>مدت زمان پرداخت: </span>{toPersianNumber(formData.repaymentPeriod)}ماه</div>
+        <div><span>تعداد اقساط: </span>{toPersianNumber(formData.repaymentPeriod)}</div>
       </div>
       <div  className='flex  justify-around mt-3'>
-      <div><span>مبلغ قسط ماهیانه: </span>{monthlyamount?.toLocaleString('fa-IR')}</div>
-      <div><span>مبلغ جریمه دیرکرد: </span>{penalty?.toLocaleString('fa-IR')}</div>
-      <div><span> درصد سود سالیانه: </span>{`${selectedFacility?.interestRate}%`}</div>
+      <div><span>مبلغ قسط ماهیانه: </span>{monthlyamount?.toLocaleString('fa-IR')} ریال</div>
+      <div><span>مبلغ جریمه دیرکرد: </span>{penalty?.toLocaleString('fa-IR')} ریال </div>
+      <div><span> درصد سود سالیانه: </span>{`${toPersianNumber(selectedFacility?.interestRate)}%`}</div>
       
       </div>
     </fieldset>
